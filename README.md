@@ -1,65 +1,89 @@
-<p align="center">
-<a href="https://joia.so">
-  <img width="90" src="https://assets.joia.so/joia_logo_red.svg" alt="Joia Logo">
-  
-</a>
-</p>
+# Invent - an app framework for beginners
 
-<h3 align="center"><strong>A lightweight ChatGPT alternative designed for team collaboration</strong></h3>
+View this repository
+[via GitHub pages](https://invent-framework.github.io/invent/).
 
-[Joia](https://joia.so/) is an open source alternative to _[ChatGPT for Teams](https://openai.com/chatgpt/team)_, designed from the ground up for collaboration.
+This project's documentation can be found
+[here](https://invent-framework.rtfd.io).
 
-The easiest way to get started with Joia is by creating a [Joia Cloud account](https://joia.so/). If you prefer to self-host Joia, please refer to our documentation below.
+This project started in 2019 as "PyperCard" ~ a re-implementation of 
+[Adafruit's CircuitPython PYOA](https://github.com/adafruit/Adafruit_CircuitPython_PYOA)
+module, but for non-CircuitPython computing environments. It was originally
+written using the [Kivy](https://kivy.org/) framework for cross-platform
+development. After successfully testing PyperCard for teaching and learning
+purposes with the wonderful
+[young folk](https://youngcodersmeetup.wixsite.com/ycm-uk) at the London
+[Young Coders' Meetup](https://twitter.com/YCM_UK), development stalled because
+of the COVID pandemic.
 
-## Main features & benefits
+The project name has since been changed to "Invent" to remove any HyperCard
+related expectations. There are further significant changes:
 
-- Efortlessly grant **people access** to a user-friendly AI Chat.
-- Use any LLM, including the **latest open source LLMs** like Llama 2, Mixtral and others (more coming soon).
-- Create **collaborative chatbots** for specific use cases, and share them across your teams.
-- **Save between of 50% and 75%** (depends on usage) compared to _ChatGPT for Teams_ and _ChatGPT Enterprise_.
-- **Get responses 40% faster** than ChatGPT Plus. The OpenAI API is generally faster.
-- **Prevent your prompts from being used for training purposes**. When using ChatGPT Plus, your data might then be used for training purposes. However, when connecting to OpenAI via API keys, you're guaranteed that any inputs provided won't be used.
+* [PyScript](https://pyscript.net/) replaces Kivy as the underlying
+  cross-platform framework for generating and running the user interface.
+* [Nicholas](https://github.com/ntoll), the original developer and maintainer
+  of Invent/PyperCard, has been hired by [Anaconda Inc](https://anaconda.com/)
+  to work on PyScript, and so his work on this project is sponsored by his
+  employer.
+* Ownership of the repository has been transferred to the
+  [invent framework organisation](https://github.com/invent-framework) on
+  GitHub (the old repository will automatically redirect to the new one).
+* Since this is a complete rewrite, the license has been changed from MIT
+  to Apache2.
 
-## Getting started
+All the assets relating to the old version of the project can still be found
+in the [old branch](https://github.com/invent-framework/invent/tree/old) in this
+repository.
 
-#### Cloud
+## Developer setup
 
-The easiest way to get started with Joia is with [our official managed service in the cloud](https://joia.so/). At the moment it is completely free to use without limits, although we have plans to introduce a pricing model in the future.
+Git clone the repository:
 
-In the cloud version you can either use your own API keys for LLM provider, or purchase credits with us.
+```
+git clone https://github.com/invent-framework/invent.git
+```
 
-Our cloud version can save a substantial amount of developer time and resources. We think it's the de-facto solution for most customers and the one which provides most value for mone. Plus, any future revenues will go towards the funding and maintenance of Joia. You’ll be supporting open source software and getting a great service!
+(Recommended) Upgrade local pip:
 
-#### Vercel
+```
+pip install --upgrade pip
+```
 
-To deploy on Vercel, follow these steps:
+Make a virtualenv, then install the requirements:
 
-1. Create a project by clicking on **Add New... > Project**.
-2. Select **Import Third-Party Git Repository** and enter the URL of this repository.
-3. Insert the environment variables. To do so, use `.env.example` as a reference for the variables to fill in. You'll need to set the `DATABASE_URL` variable to point to your Postgres database, which you can provision with Vercel.
-4. Deploy the project.
-5. Set up your domain to point to the Vercel deployment.
+```
+pip install -r requirements.txt
+```
 
-#### Fully self-hosted
+Most useful developer related tasks are automated by a `Makefile`:
 
-To self host a Joia app you'll need to follow the next steps:
+```
+$ make
+There's no default Makefile target right now. Try:
 
-1. Provision a Postgres database. The details may vary based on your stup.
-2. Clone or copy this repository.
-3. Create an `.env` file based on the `.env.example` file. You'll need to set the `DATABASE_URL` variable to point to your Postgres database.
-4. Install the dependencies by running `yarn install`.
-5. Build the NextJS app by running `yarn production:build`. This will prepare NextJS to be built and run the build itself.
-6. Run a post-install script by running `yarn production:postbuild`. This script will run the migrations.
-7. Bootstrap the app by running `yarn production:start`.
+make clean - reset the project and remove auto-generated assets.
+make tidy - tidy up the code with the 'black' formatter.
+make lint - check the code for obvious errors with flake8.
+make lint-all - check all code for obvious errors with flake8.
+make serve - serve the project at: http://0.0.0.0:8000/
+make test - while serving the app, run the test suite in browser.
+make dist - build the module as a package.
+make publish-test - upload the package to the PyPI test instance.
+make publish-live - upload the package to the PyPI LIVE instance.
+```
 
-## Feedback
+To run the test suite:
 
-We are happy to hear your valuable feedback. For this purpose, we have created a [Discord channel](https://discord.com/invite/wTHhNBDKvW) where you can share your thoughts and ideas. [Join the channel here](https://discord.com/invite/wTHhNBDKvW).
+```
+$ make serve
+```
 
-## Roadmap
+Then visit [http://localhost:8000/](http://localhost:8000/).
 
-We welcome feedback from our community. To stay up to date with all the latest news and product updates or to reach us, [follow us on X (formerly Twitter)](https://twitter.com/joiahq).
+The tests should open in your browser, and pass. ;-)
 
-## License & Trademarks
+**Please use a width of 79 characters for source code files.**
 
-Joia is open source under the GNU Affero General Public License Version 3 (AGPLv3) or any later version.
+## Example applications
+
+Coming soon...
